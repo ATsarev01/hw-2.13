@@ -1,8 +1,8 @@
 package com.github.atsarev01.mochito.service;
 
-import com.github.atsarev01.mochito.exeption.EmployeeAlreadyAddedExeption;
-import com.github.atsarev01.mochito.exeption.EmployeeNotFoundExeption;
-import com.github.atsarev01.mochito.exeption.EmployeeStorageIsFullExeption;
+import com.github.atsarev01.mochito.exeption.EmployeeAlreadyAddedException;
+import com.github.atsarev01.mochito.exeption.EmployeeNotFoundException;
+import com.github.atsarev01.mochito.exeption.EmployeeStorageIsFullException;
 import com.github.atsarev01.mochito.model.Employee;
 import org.springframework.stereotype.Service;
 
@@ -24,37 +24,37 @@ public class EmployeeService {
         this.validatorService = validatorService;
     }
 
-    private String getKey(String firstName, String lastName) {
-        return firstName + "|" + lastName;
+    private String getKey(String firstName, String surName) {
+        return firstName + "|" + surName;
     }
 
-    public Employee add(String firstName, String lastName, int department, int salary) {
+    public Employee add(String firstName, String surName, int department, int salary) {
         if (employees.size() < SIZE) {
             Employee employee = new Employee(validatorService.validateName(firstName),
-                    validatorService.validateSurname(lastName),
+                    validatorService.validateSurname(surName),
                     department,
                     salary);
             if (employees.containsKey(employee.getFullName() )) {
-                throw new EmployeeAlreadyAddedExeption();
+                throw new EmployeeAlreadyAddedException();
             }
             employees.put(employee.getFullName(), employee);
             return employee;
         }
-        throw new EmployeeStorageIsFullExeption();
+        throw new EmployeeStorageIsFullException();
 
     }
-    public Employee remove(String firstName, String lastName) {
-        Employee employee = new Employee(firstName, lastName);
+    public Employee remove(String firstName, String surName) {
+        Employee employee = new Employee(firstName, surName);
         if (!employees.containsKey(employee.getFullName())) {
-            throw new EmployeeNotFoundExeption();
+            throw new EmployeeNotFoundException();
         }
         employees.remove(employee.getFullName());
         return employee;
     }
-    public Employee find(String firstName, String lastName) {
-        Employee employee = new Employee(firstName, lastName);
+    public Employee find(String firstName, String surName) {
+        Employee employee = new Employee(firstName, surName);
         if (!employees.containsKey(employee.getFullName())) {
-            throw new EmployeeNotFoundExeption();
+            throw new EmployeeNotFoundException();
         }
         return employees.get(employee.getFullName());
 
