@@ -30,16 +30,16 @@ public class DepartmentServiceTest {
     @InjectMocks
     private DepartmentService departmentService;
 
-    public static Stream<Arguments> EmployeeWithMaxSalaryTestParams() {
+    public static Stream<Arguments> employeeWithMaxSalaryTestParams() {
         return Stream.of(
                 Arguments.of(1,new Employee("Vasya", "Pupkin", 1,12000)),
                 Arguments.of(2,new Employee("Sergey", "Sergeev", 2,15000)),
                 Arguments.of(3,new Employee("Andrey", "Petrov", 3,25000))
         );
     }
-    public static Stream<Arguments> EmployeeWithMinSalaryTestParams() {
+    public static Stream<Arguments> employeeWithMinSalaryTestParams() {
         return Stream.of(
-                Arguments.of(1,new Employee("Alexey", "Ivanov", 1,10000)),
+                Arguments.of(1,new Employee("Ivan", "Ivanov", 1,10000)),
                 Arguments.of(2,new Employee("Maxim", "Putin", 2,8000)),
                 Arguments.of(3,new Employee("Andrey", "Petrov", 3,25000))
         );
@@ -49,7 +49,7 @@ public class DepartmentServiceTest {
         return Stream.of(
                 Arguments.of(1,
                         List.of(
-                                new Employee("Alexey", "Ivanov", 1, 10000),
+                                new Employee("Ivan", "Ivanov", 1, 10000),
                                 new Employee("Vasya", "Pupkin", 1, 12000)
                         ),
                         Arguments.of(2,
@@ -68,7 +68,7 @@ public class DepartmentServiceTest {
     public void beforeEach() {
         when(employeeService.getAll()).thenReturn(
                 List.of(
-                new Employee("Alexey", "Ivanov", 1,10000),
+                new Employee("Ivan", "Ivanov", 1,10000),
                 new Employee("Maxim", "Putin", 2,8000),
                 new Employee("Andrey", "Petrov", 3,25000),
                 new Employee("Vasya", "Pupkin", 1,12000),
@@ -79,8 +79,8 @@ public class DepartmentServiceTest {
     }
 
     @ParameterizedTest
-    @MethodSource("EmployeeWithMaxSalaryTestParams")
-    public void EmployeeWithMaxSalaryTest(int department, Employee expected) {
+    @MethodSource("employeeWithMaxSalaryTestParams")
+    public void employeeWithMaxSalaryTest(int department, Employee expected) {
         assertThat(departmentService.findEmployeeWithMaxSalaryFromDepartment(department))
                 .usingRecursiveComparison()
                 .comparingOnlyFields("name", "surName", "department", "salary")
@@ -88,14 +88,14 @@ public class DepartmentServiceTest {
 
     }
     @Test
-    public void EmployeeWithMaxSalaryNegativeTest() {
+    public void employeeWithMaxSalaryNegativeTest() {
         assertThatExceptionOfType(EmployeeNotFoundException.class)
                 .isThrownBy(()->departmentService.findEmployeeWithMaxSalaryFromDepartment(4));
 
     }
     @ParameterizedTest
-    @MethodSource("EmployeeWithMaxSalaryTestParams")
-    public void EmployeeWithMinSalaryTest(int department, Employee expected) {
+    @MethodSource("employeeWithMaxSalaryTestParams")
+    public void employeeWithMinSalaryTest(int department, Employee expected) {
         assertThat(departmentService.findEmployeeWithMinSalaryFromDepartment(department))
                 .usingRecursiveComparison()
                 .comparingOnlyFields("name", "surName", "department", "salary")
@@ -103,7 +103,7 @@ public class DepartmentServiceTest {
 
     }
     @Test
-    public void EmployeeWithMinSalaryNegativeTest() {
+    public void employeeWithMinSalaryNegativeTest() {
         assertThatExceptionOfType(EmployeeNotFoundException.class)
                 .isThrownBy(()->departmentService.findEmployeeWithMinSalaryFromDepartment(4));
 
@@ -126,7 +126,7 @@ public class DepartmentServiceTest {
                         Map.of(
                                 1,
                                 List.of(
-                                        new Employee("Alexey", "Ivanov", 1, 10000),
+                                        new Employee("Ivan", "Ivanov", 1, 10000),
                                         new Employee("Vasya", "Pupkin", 1, 12000)
                                 ),
                                         2,

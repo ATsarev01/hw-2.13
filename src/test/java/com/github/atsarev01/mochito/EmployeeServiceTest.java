@@ -36,7 +36,7 @@ public class EmployeeServiceTest {
 
 @BeforeEach
     public void beforeEach() {
-        employeeService.add("Alexey", "Ivanov", 1, 10000);
+        employeeService.add("Ivan", "Ivanov", 1, 10000);
         employeeService.add("Maxim", "Putin", 2, 8000);
 
     }
@@ -71,7 +71,7 @@ public class EmployeeServiceTest {
     @Test
     public void addEmployeeWhichWasAlreadyAddedTest() {
         assertThatExceptionOfType(EmployeeAlreadyAddedException.class)
-                .isThrownBy(() ->employeeService.add("Alexey", "Ivanov", 1, 10000));
+                .isThrownBy(() ->employeeService.add("Ivan", "Ivanov", 1, 10000));
     }
 
     @Test
@@ -81,7 +81,7 @@ public class EmployeeServiceTest {
         }
 
         assertThatExceptionOfType(EmployeeStorageIsFullException.class)
-                .isThrownBy(() ->employeeService.add("Vasya", "Pupkin", 1, 10000));
+                .isThrownBy(() ->employeeService.add("Vasya", "Pupkin", 1, 12000));
     }
 
     @Test

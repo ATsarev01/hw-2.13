@@ -14,7 +14,7 @@ import java.util.Map;
 @Service
 public class EmployeeService {
 
-    private static final int SIZE = 3;
+    private static final int SIZE = 10;
 
     private final Map <String, Employee> employees = new HashMap<>();
 
