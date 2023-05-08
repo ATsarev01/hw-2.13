@@ -94,7 +94,7 @@ public class DepartmentServiceTest {
 
     }
     @ParameterizedTest
-    @MethodSource("employeeWithMaxSalaryTestParams")
+    @MethodSource("employeeWithMinSalaryTestParams")
     public void employeeWithMinSalaryTest(int department, Employee expected) {
         assertThat(departmentService.findEmployeeWithMinSalaryFromDepartment(department))
                 .usingRecursiveComparison()

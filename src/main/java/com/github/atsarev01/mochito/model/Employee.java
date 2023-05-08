@@ -16,8 +16,10 @@ public class Employee {
     }
 
     public Employee(String firstName, String surName) {
-
+        this.firstName = firstName;
+        this.surName = surName;
     }
+
 
     public String getFirstName() {
         return firstName;
