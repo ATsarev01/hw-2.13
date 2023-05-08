@@ -1,7 +1,7 @@
 package com.github.atsarev01.mochito.service;
 
-import com.github.atsarev01.mochito.exeption.IncorrectNameExeption;
-import com.github.atsarev01.mochito.exeption.IncorrectSurnameExeption;
+import com.github.atsarev01.mochito.exeption.IncorrectNameException;
+import com.github.atsarev01.mochito.exeption.IncorrectSurnameException;
 import org.apache.maven.surefire.shade.org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class ValidatorService {
     public String validateName(String name) {
         if (!StringUtils.isAlpha(name)) {
-            throw new IncorrectNameExeption();
+            throw new IncorrectNameException();
         }
         return StringUtils.capitalize(name.toLowerCase());
     }
@@ -19,7 +19,7 @@ public class ValidatorService {
         for (int i = 0; i < surnames.length; i++) {
             String lastName = surnames[i];
             if (!StringUtils.isAlpha(surname)) {
-                throw new IncorrectSurnameExeption();
+                throw new IncorrectSurnameException();
             }
             surnames[i] = StringUtils.capitalize(lastName.toLowerCase());
         }

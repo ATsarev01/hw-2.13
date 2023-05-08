@@ -4,30 +4,32 @@ import java.util.Objects;
 
 public class Employee {
     private String firstName;
-    private String lastName;
+    private String surName;
     private int department;
     private int salary;
 
-    public Employee(String firstName, String lastName, int department, int salary) {
+    public Employee(String firstName, String surName, int department, int salary) {
         this.firstName = firstName;
-        this.lastName = lastName;
+        this.surName = surName;
         this.department = department;
         this.salary = salary;
     }
 
-    public Employee(String firstName, String lastName) {
-
+    public Employee(String firstName, String surName) {
+        this.firstName = firstName;
+        this.surName = surName;
     }
+
 
     public String getFirstName() {
         return firstName;
     }
 
     public String getLastName() {
-        return lastName;
+        return surName;
     }
 
-    public String getFullName() { return firstName + " " + lastName; }
+    public String getFullName() { return firstName + " " + surName; }
 
     public int getDepartment() {
         return department;
@@ -50,19 +52,19 @@ public class Employee {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-        return Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName);
+        return Objects.equals(firstName, employee.firstName) && Objects.equals(surName, employee.surName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName, department, salary);
+            return Objects.hash(firstName, surName, department, salary);
     }
 
     @Override
     public String toString() {
         return "Employee{" +
                 "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+                ", surName='" + surName + '\'' +
                 ", отдел='" + department + '\'' +
                 ", ЗП='" + salary + '\'' +
                 '}';

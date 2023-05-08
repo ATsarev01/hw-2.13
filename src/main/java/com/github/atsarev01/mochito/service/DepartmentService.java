@@ -1,5 +1,6 @@
 package com.github.atsarev01.mochito.service;
 
+import com.github.atsarev01.mochito.exeption.EmployeeNotFoundException;
 import com.github.atsarev01.mochito.model.Employee;
 import org.springframework.stereotype.Service;
 
@@ -47,13 +48,13 @@ public class DepartmentService {
         return employeeService.getAll().stream()
                 .filter(employee -> employee.getDepartment() == department)
                 .min(Comparator.comparing(Employee::getSalary))
-                .orElse(null);
+                .orElseThrow(EmployeeNotFoundException::new);
     }
     public Employee findEmployeeWithMaxSalaryFromDepartment(int department) {
         return employeeService.getAll().stream()
                 .filter(employee -> employee.getDepartment() == department)
                 .max(Comparator.comparing(Employee::getSalary))
-                .orElse(null);
+                .orElseThrow(EmployeeNotFoundException::new);
     }
     public double totalSalariesForDepartment(int department) {
         return employeeService.getAll().stream()
